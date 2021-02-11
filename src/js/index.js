@@ -1,54 +1,58 @@
 import '../css/style.css';
 
 function fieldValidationName(element) {
-  let parent = element.parentElement;
-  
-  let errorString = '';
+  let checkErorr = true;
   if (!isFilled(element.value)) {
-  errorString = 'Expected input name';
+  checkErorr = false;
+  element.style['boxShadow'] = 'inset 0 -1px 0 red';
+  return -1;
   }
   if (isNumber(element.value)) {
-  errorString = 'Name must not contain numbers';
-  }
-  if (errorString.length > 0) {
+  checkErorr = false;
   element.style['boxShadow'] = 'inset 0 -1px 0 red';
-  parent.lastChild.innerHTML = errorString;
+  return 1;
+  }
+  if (!checkErorr) {
   } else {
   element.style['boxShadow'] = 'inset 0 -1px 0 rgba(199, 199, 199, 0.3)';
-  parent.lastChild.innerHTML = '';
+    return 0;
   }
   console.log(element.value.length);
   }
-  function passwordValidation(password) {
-    let parent = password.parentElement;
-    let errorString = '';
-    if (!isFilled(password.value)) {
-      errorString = 'Expected input password';
-    } else if (password.value.length < 6) {
-      errorString = 'Password must be more than 6 characters';
+  function emailValidation(email) {
+    let checkErorr = true;
+    if (!isFilled(email.value)) {
+      checkErorr = false;
+      email.style['boxShadow'] = 'inset 0 -1px 0 red';
+      return -1;
     }
-    if (errorString.length > 0) {
-      password.style['boxShadow'] = 'inset 0 -1px 0 red';
-      parent.lastChild.innerHTML = errorString;
+    if (!isEmail(email.value)) {
+      checkErorr = false;
+      email.style['boxShadow'] = 'inset 0 -1px 0 red';
+      return 1;
+    }
+    if (!checkErorr) {
     } else {
-      password.style['boxShadow'] = 'inset 0 -1px 0 rgba(199, 199, 199, 0.3)';
-      parent.lastChild.innerHTML = '';
+    email.style['boxShadow'] = 'inset 0 -1px 0 rgba(199, 199, 199, 0.3)';
+      return 0;
     }
   }
-  function emailValidation(email) {
-    let parent = email.parentElement;
-    let errorString = '';
-    if (!isFilled(email.value)) {
-      errorString = 'Expected input email';
-    } else if (!isEmail(email.value)) {
-      errorString = 'Incorrect mail format';
+  function passwordValidation(password) {
+    let checkErorr = true;
+    if (!isFilled(password.value)) {
+      checkErorr = false;
+      password.style['boxShadow'] = 'inset 0 -1px 0 red';
+      return -1;
     }
-    if (errorString.length > 0) {
-      email.style['boxShadow'] = 'inset 0 -1px 0 red';
-      parent.lastChild.innerHTML = errorString;
+    if (password.value.length < 6) {
+      checkErorr = false;
+      password.style['boxShadow'] = 'inset 0 -1px 0 red';
+      return 1;
+    }
+    if (!checkErorr) {
     } else {
-      email.style['boxShadow'] = 'inset 0 -1px 0 rgba(199, 199, 199, 0.3)';
-      parent.lastChild.innerHTML = '';
+    password.style['boxShadow'] = 'inset 0 -1px 0 rgba(199, 199, 199, 0.3)';
+      return 0;
     }
   }
   function isFilled(element) {
@@ -78,8 +82,52 @@ function fieldValidationName(element) {
     let lastName = document.querySelector('#last-name');
     let email = document.querySelector('#email');
     let password = document.querySelector('#password');
-    fieldValidationName(name);
-    fieldValidationName(lastName);
-    emailValidation(email);
-    passwordValidation(password);
+    if(fieldValidationName(name) === 0) {
+    document.getElementById('form-registration__item__error-name__empty').style.visibility = "hidden";
+    document.getElementById('form-registration__item__error-name__input').style.visibility = "hidden";
+    }
+    else if(fieldValidationName(name) === 1) {
+      document.getElementById('form-registration__item__error-name__empty').style.visibility = "hidden";
+      document.getElementById('form-registration__item__error-name__input').style.visibility = "visible";
+    }
+    else{
+      document.getElementById('form-registration__item__error-name__empty').style.visibility = "visible"; 
+      document.getElementById('form-registration__item__error-name__input').style.visibility = "hidden";     
+    }
+    if(fieldValidationName(lastName) === 0) {
+      document.getElementById('form-registration__item__error-last-name__empty').style.visibility = "hidden";
+      document.getElementById('form-registration__item__error-last-name__input').style.visibility = "hidden";
+      }
+      else if(fieldValidationName(lastName) === 1) {
+        document.getElementById('form-registration__item__error-last-name__empty').style.visibility = "hidden";
+        document.getElementById('form-registration__item__error-last-name__input').style.visibility = "visible";
+      }
+      else{
+        document.getElementById('form-registration__item__error-last-name__empty').style.visibility = "visible"; 
+        document.getElementById('form-registration__item__error-last-name__input').style.visibility = "hidden";     
+      }
+      if(emailValidation(email) === 0) {
+        document.getElementById('form-registration__item__error-email__empty').style.visibility = "hidden";
+        document.getElementById('form-registration__item__error-email__input').style.visibility = "hidden";
+        }
+        else if(emailValidation(email) === 1) {
+          document.getElementById('form-registration__item__error-email__empty').style.visibility = "hidden";
+          document.getElementById('form-registration__item__error-email__input').style.visibility = "visible";
+        }
+        else{
+          document.getElementById('form-registration__item__error-email__empty').style.visibility = "visible"; 
+          document.getElementById('form-registration__item__error-email__input').style.visibility = "hidden";     
+        }
+        if(passwordValidation(password) === 0) {
+          document.getElementById('form-registration__item__error-password__empty').style.visibility = "hidden";
+          document.getElementById('form-registration__item__error-password__input').style.visibility = "hidden";
+          }
+          else if(passwordValidation(password) === 1) {
+            document.getElementById('form-registration__item__error-password__empty').style.visibility = "hidden";
+            document.getElementById('form-registration__item__error-password__input').style.visibility = "visible";
+          }
+          else{
+            document.getElementById('form-registration__item__error-password__empty').style.visibility = "visible"; 
+            document.getElementById('form-registration__item__error-password__input').style.visibility = "hidden";     
+          }
   };

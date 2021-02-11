@@ -43,8 +43,10 @@ body {
 }
 
 .form-registration__item__error {
-  margin-top: 3px;
+  visibility: hidden;
+  margin-top: 1px;
   margin-left: 15px;
+  text-align: center;
   color: #ef0f18ff;
 }
 
