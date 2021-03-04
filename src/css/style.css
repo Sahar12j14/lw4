@@ -43,11 +43,14 @@ body {
 }
 
 .form-registration__item__error {
-  visibility: hidden;
   margin-top: 1px;
   margin-left: 15px;
   text-align: center;
   color: #ef0f18ff;
+}
+
+.form-registration__input__error {
+  box-shadow: inset 0 -1px 0 red;
 }
 
 #form-registration__button {
