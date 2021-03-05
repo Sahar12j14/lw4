@@ -1,6 +1,6 @@
 import '../css/style.css';
 
-function ValidationName(element) {
+function validationName(element) {
   let checkErorr = true;
   if (!isFilled(element.value)) {
     checkErorr = false;
@@ -104,13 +104,13 @@ registrationButton.onclick = function () {
   const lastName = document.querySelector('#last-name');
   const email = document.querySelector('#email');
   const password = document.querySelector('#password');
-  if (ValidationName(name).errCode !== 0) {
-    document.getElementById('form-registration__item__error-name').innerHTML=ValidationName(name).errMessage;
+  if (validationName(name).errCode !== 0) {
+    document.getElementById('form-registration__item__error-name').innerHTML=validationName(name).errMessage;
   } else {
     document.getElementById('form-registration__item__error-name').innerHTML='';
   }
-  if (ValidationName(lastName).errCode !== 0) {
-    document.getElementById('form-registration__item__error-last-name').innerHTML=ValidationName(lastName).errMessage;
+  if (validationName(lastName).errCode !== 0) {
+    document.getElementById('form-registration__item__error-last-name').innerHTML=validationName(lastName).errMessage;
   } else {
     document.getElementById('form-registration__item__error-last-name').innerHTML='';
   }
